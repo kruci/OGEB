@@ -1,5 +1,13 @@
 #include <iostream>
-#include "includes.h"
+
+#include "OGameSession.h"
+#include "Position.h"
+#include "Resources.h"
+#include "ShipsParser.h"
+#include "ships.h"
+
+#define HELP_SHORT "\"l\" for Login"<<endl<<"\"h\" for Help"<<endl<<"\"e\" for Exit"
+#define INFO "OGame Expeditions Bot by R.K"
 
 using namespace std;
 
