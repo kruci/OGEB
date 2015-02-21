@@ -35,9 +35,9 @@ OBJDIR_RELEASE = obj/Release
 DEP_RELEASE = 
 OUT_RELEASE = bin/Release/OGame\ Expedition\ Bot
 
-OBJ_DEBUG = $(OBJDIR_DEBUG)/main.o $(OBJDIR_DEBUG)/src/OGameSession.o $(OBJDIR_DEBUG)/src/Position.o $(OBJDIR_DEBUG)/src/Resources.o $(OBJDIR_DEBUG)/src/ShipsParser.o $(OBJDIR_DEBUG)/src/Ships.o
+OBJ_DEBUG = $(OBJDIR_DEBUG)/main.o $(OBJDIR_DEBUG)/src/OGameSession.o $(OBJDIR_DEBUG)/src/Position.o $(OBJDIR_DEBUG)/src/Resources.o $(OBJDIR_DEBUG)/src/ShipsParser.o $(OBJDIR_DEBUG)/src/FleetVariables.o
 
-OBJ_RELEASE = $(OBJDIR_RELEASE)/main.o $(OBJDIR_RELEASE)/src/OGameSession.o $(OBJDIR_RELEASE)/src/Position.o $(OBJDIR_RELEASE)/src/Resources.o $(OBJDIR_RELEASE)/src/ShipsParser.o $(OBJDIR_RELEASE)/src/Ships.o
+OBJ_RELEASE = $(OBJDIR_RELEASE)/main.o $(OBJDIR_RELEASE)/src/OGameSession.o $(OBJDIR_RELEASE)/src/Position.o $(OBJDIR_RELEASE)/src/Resources.o $(OBJDIR_RELEASE)/src/ShipsParser.o $(OBJDIR_RELEASE)/src/FleetVariables.o
 
 all: debug release
 
@@ -70,8 +70,8 @@ $(OBJDIR_DEBUG)/src/Resources.o: src/Resources.cpp
 $(OBJDIR_DEBUG)/src/ShipsParser.o: src/ShipsParser.cpp
 	$(CXX) $(CFLAGS_DEBUG) $(INC_DEBUG) -c src/ShipsParser.cpp -o $(OBJDIR_DEBUG)/src/ShipsParser.o
 
-$(OBJDIR_DEBUG)/src/Ships.o: src/Ships.cpp
-	$(CXX) $(CFLAGS_DEBUG) $(INC_DEBUG) -c src/Ships.cpp -o $(OBJDIR_DEBUG)/src/Ships.o
+$(OBJDIR_DEBUG)/src/FleetVariables.o: src/FleetVariables.cpp
+	$(CXX) $(CFLAGS_DEBUG) $(INC_DEBUG) -c src/FleetVariables.cpp -o $(OBJDIR_DEBUG)/src/FleetVariables.o
 
 clean_debug: 
 	rm -f $(OBJ_DEBUG) $(OUT_DEBUG)
@@ -106,8 +106,8 @@ $(OBJDIR_RELEASE)/src/Resources.o: src/Resources.cpp
 $(OBJDIR_RELEASE)/src/ShipsParser.o: src/ShipsParser.cpp
 	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c src/ShipsParser.cpp -o $(OBJDIR_RELEASE)/src/ShipsParser.o
 
-$(OBJDIR_RELEASE)/src/Ships.o: src/Ships.cpp
-	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c src/Ships.cpp -o $(OBJDIR_RELEASE)/src/Ships.o
+$(OBJDIR_RELEASE)/src/FleetVariables.o: src/FleetVariables.cpp
+	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c src/FleetVariables.cpp -o $(OBJDIR_RELEASE)/src/FleetVariables.o
 
 clean_release: 
 	rm -f $(OBJ_RELEASE) $(OUT_RELEASE)

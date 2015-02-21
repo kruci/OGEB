@@ -20,5 +20,21 @@ namespace ships{
     extern std::string ships_names[12];
 }
 
+namespace mission{
+
+    enum missions_names{
+        expedition,
+        clonozation,
+        recycling,
+        transport,
+        deploy,
+        spy,
+        ali_def,
+        attack,
+        ali_attack,
+        moon_destruction
+    };
+}
+
 //---------------------------------------------------------------------------
 #endif // SHIPS_H

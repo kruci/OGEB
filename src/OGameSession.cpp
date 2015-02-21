@@ -12,7 +12,7 @@
 #include "Poco/Path.h"
 #include "Poco/URI.h"
 #include "Poco/Exception.h"
-#include "ships.h"
+#include "FleetVariables.h"
 
 using Poco::Net::HTTPClientSession;
 using Poco::Net::HTTPRequest;

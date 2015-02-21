@@ -4,7 +4,7 @@
 #include "Position.h"
 #include "Resources.h"
 #include "ShipsParser.h"
-#include "ships.h"
+#include "FleetVariables.h"
 
 #define HELP_SHORT "\"l\" for Login"<<endl<<"\"h\" for Help"<<endl<<"\"e\" for Exit"
 #define INFO "OGame Expeditions Bot by R.K"
@@ -64,7 +64,7 @@ int main()
 
                 if(option == 's')
                 {
-                    int t1,t2,t3,t4,s,ht;
+                    int t1,t2,t3,s,ht;
 
                     cout<<"Starting Galaxy      : ";
                     cin>>t1;
@@ -109,6 +109,8 @@ int main()
                         cout<<ships::ships_names[g]<<" :";
                         cin>>ships[g];
                     }
+
+                    /**space for exp loop**/
 
                 }
                 else if(option == 'd')

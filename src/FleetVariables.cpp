@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "ships.h"
+#include "FleetVariables.h"
 
 namespace ships
 {
@@ -22,3 +22,4 @@ namespace ships
                                     "Small cargo","Large cargo","Colony ship","Battlecuiser"
                                     "Bomber","Devastator","Dead Star","Recycler","Spy Sond"};
 }
+
