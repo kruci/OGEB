@@ -43,7 +43,7 @@ class OGameSession
         OGameSession(std::string server_prefix, std::string name, std::string pass);
         virtual ~OGameSession();
         bool login();
-        bool sendFleet(Position* starting_position, Position* target_position, int mission_type, int ships[], int speed, int expedition_time, Resources* resources);
+        bool sendFleet(Position &starting_position, Position &target_position, int mission_type, int ships[], int speed, int expedition_time, Resources &resources);
 
 };
 

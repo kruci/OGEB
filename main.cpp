@@ -20,7 +20,7 @@ int main()
     OGameSession *OGSession;
     Position *Sp, *Tp;
     Resources *res;
-    int ships[12] = {0};
+    int ships[13] = {0};
 
     cout<<INFO<<endl<<endl;
 
@@ -104,13 +104,17 @@ int main()
                         res = new Resources(0,0,0);
                     }
 
-                    for(int g = 0;g <= 11;g++)
+                    for(int g = 0;g <= 12;g++)
                     {
                         cout<<ships::ships_names[g]<<" :";
                         cin>>ships[g];
                     }
 
                     /**space for exp loop**/
+                    //for(int as = 0; as <= number_of_expeditions;as++)
+                    //{
+                        OGSession->sendFleet(*Sp, *Tp, mission::expedition, ships, s, ht, *res);
+                    //}
 
                 }
                 else if(option == 'd')

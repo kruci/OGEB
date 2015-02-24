@@ -12,10 +12,10 @@ Position::~Position()
     //dtor
 }
 
-inline int Position::getGalaxy(){return G;}
-inline int Position::getSolarSystem(){return SS;}
-inline int Position::getPlanet(){return P;}
+int Position::getGalaxy(){return G;}
+int Position::getSolarSystem(){return SS;}
+int Position::getPlanet(){return P;}
 
-inline bool Position::setGalaxy(int new_galaxy){G = new_galaxy; return true;}
-inline bool Position::setSolarSystem(int new_solar_system){SS = new_solar_system; return true;}
-inline bool Position::setPlanet(int new_planet_position){P = new_planet_position; return true;}
+bool Position::setGalaxy(int new_galaxy){G = new_galaxy; return true;}
+bool Position::setSolarSystem(int new_solar_system){SS = new_solar_system; return true;}
+bool Position::setPlanet(int new_planet_position){P = new_planet_position; return true;}

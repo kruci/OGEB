@@ -10,13 +10,13 @@ class Resources
         Resources(int metal, int crystal, int deuterium);
         virtual ~Resources();
 
-        inline int getMetal();
-        inline int getCrystal();
-        inline int getDeuterium();
+        int getMetal();
+        int getCrystal();
+        int getDeuterium();
 
-        inline bool setMetal(int M);
-        inline bool setCrystal(int C);
-        inline bool setDeuterium(int D);
+        bool setMetal(int M);
+        bool setCrystal(int C);
+        bool setDeuterium(int D);
 };
 
 #endif // RESOURCES_H

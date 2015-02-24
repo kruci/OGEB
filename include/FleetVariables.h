@@ -17,7 +17,8 @@ namespace ships{
     extern std::string colony_ship;
     extern std::string dead_star;
 
-    extern std::string ships_names[12];
+    extern std::string ships_names[13];
+    extern std::string ships_strings[13];
 }
 
 namespace mission{

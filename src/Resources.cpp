@@ -8,10 +8,10 @@ Resources::~Resources()
 {
 }
 
-inline int Resources::getMetal(){return M;}
-inline int Resources::getCrystal(){return C;}
-inline int Resources::getDeuterium(){return D;}
+int Resources::getMetal(){return M;}
+int Resources::getCrystal(){return C;}
+int Resources::getDeuterium(){return D;}
 
-inline bool Resources::setMetal(int new_metal_amount){M = new_metal_amount; return true;}
-inline bool Resources::setCrystal(int new_crystal_amount){C = new_crystal_amount; return true;}
-inline bool Resources::setDeuterium(int new_deuterium_amount){D = new_deuterium_amount; return true;}
+bool Resources::setMetal(int new_metal_amount){M = new_metal_amount; return true;}
+bool Resources::setCrystal(int new_crystal_amount){C = new_crystal_amount; return true;}
+bool Resources::setDeuterium(int new_deuterium_amount){D = new_deuterium_amount; return true;}
