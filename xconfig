@@ -1,0 +1,54 @@
+;Example config file
+;G  -> Galaxy
+;S  -> Solar System
+;P  -> Planet position
+;M  -> Metal
+;C  -> Crystal
+;D  -> Deuterium
+;0  -> Light fighter
+;1  -> Heavy fighter
+;2  -> Cruiser
+;3  -> Battleship
+;4  -> Small cargo
+;5  -> Large cargo
+;6  -> Colony ship
+;7  -> Battlecuiser
+;8  -> Bomber
+;9  -> Devastator
+;10 -> Dead Star
+;11 -> Recycler
+;12 -> Spy Sond
+
+[StartingPosition]
+G = 1
+S = 50
+P = 10
+
+[TargetPosition]
+G = 1
+S = 50
+P = 16
+
+[Other]
+Speed = 10
+HoldTime = 1
+
+[Resources]
+M = 0
+C = 0
+D = 0
+
+[Ships]
+0 = 0
+1 = 0
+2 = 0
+3 = 0
+4 = 10
+5 = 0
+6 = 0
+7 = 0
+8 = 0
+9 = 0
+10 = 0
+11 = 0
+12 = 0

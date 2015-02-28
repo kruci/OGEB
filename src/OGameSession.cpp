@@ -258,7 +258,7 @@ bool OGameSession::sendFleet(Position &starting_position, Position &target_posit
     fleet2.setKeepAlive(true);
     fleet2.setCookies(cookies);
     std::ostream& myOStream = session->sendRequest(fleet2);
-    //myOStream << fleet2_reqBody;
+    myOStream << fleet2_reqBody;
 
     HTTPResponse fleet2_res;
     std::istream& fleet2_resString = session->receiveResponse(fleet2_res);
@@ -299,7 +299,7 @@ bool OGameSession::sendFleet(Position &starting_position, Position &target_posit
     fleet3.setContentLength(fleet3_reqBody.length());
     fleet3.setCookies(cookies);
 
-    session->sendRequest(fleet3);// << fleet3_reqBody;
+    session->sendRequest(fleet3) << fleet3_reqBody;
     HTTPResponse fleet3_res;
     std::istream& fleet3_resString = session->receiveResponse(fleet3_res);
 
@@ -357,5 +357,8 @@ bool OGameSession::sendFleet(Position &starting_position, Position &target_posit
     #endif // DEBUG
 
 
-    return true;
+    if(fleet4_res.getStatus() == 200)
+        return true;
+    else
+        return false;
 }

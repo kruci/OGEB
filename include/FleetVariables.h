@@ -24,14 +24,14 @@ namespace ships{
 namespace mission{
 
     enum missions_names{
-        expedition,
+        expedition = 15,
         clonozation,
         recycling,
-        transport,
-        deploy,
-        spy,
+        transport = 3,
+        deploy = 4,
+        spy = 6,
         ali_def,
-        attack,
+        attack = 1,
         ali_attack,
         moon_destruction
     };
