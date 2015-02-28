@@ -24,8 +24,8 @@ OBJDIR_DEBUG = obj/Debug
 DEP_DEBUG = 
 OUT_DEBUG = bin/Debug/OGame\ Expedition\ Bot
 
-INC_RELEASE = $(INC) -Iinclude
-CFLAGS_RELEASE = $(CFLAGS) -O2
+INC_RELEASE = $(INC) -Iinclude -I../OGameExpeditionBot
+CFLAGS_RELEASE = $(CFLAGS) -O2 -std=c++11 -g
 RESINC_RELEASE = $(RESINC)
 RCFLAGS_RELEASE = $(RCFLAGS)
 LIBDIR_RELEASE = $(LIBDIR)
@@ -35,9 +35,9 @@ OBJDIR_RELEASE = obj/Release
 DEP_RELEASE = 
 OUT_RELEASE = bin/Release/OGame\ Expedition\ Bot
 
-OBJ_DEBUG = $(OBJDIR_DEBUG)/main.o $(OBJDIR_DEBUG)/src/OGameSession.o $(OBJDIR_DEBUG)/src/Position.o $(OBJDIR_DEBUG)/src/Resources.o $(OBJDIR_DEBUG)/src/ShipsParser.o $(OBJDIR_DEBUG)/src/FleetVariables.o
+OBJ_DEBUG = $(OBJDIR_DEBUG)/main.o $(OBJDIR_DEBUG)/src/OGameSession.o $(OBJDIR_DEBUG)/src/Position.o $(OBJDIR_DEBUG)/src/Resources.o $(OBJDIR_DEBUG)/src/ShipsParser.o $(OBJDIR_DEBUG)/src/FleetVariables.o $(OBJDIR_DEBUG)/src/Functions.o
 
-OBJ_RELEASE = $(OBJDIR_RELEASE)/main.o $(OBJDIR_RELEASE)/src/OGameSession.o $(OBJDIR_RELEASE)/src/Position.o $(OBJDIR_RELEASE)/src/Resources.o $(OBJDIR_RELEASE)/src/ShipsParser.o $(OBJDIR_RELEASE)/src/FleetVariables.o
+OBJ_RELEASE = $(OBJDIR_RELEASE)/main.o $(OBJDIR_RELEASE)/src/OGameSession.o $(OBJDIR_RELEASE)/src/Position.o $(OBJDIR_RELEASE)/src/Resources.o $(OBJDIR_RELEASE)/src/ShipsParser.o $(OBJDIR_RELEASE)/src/FleetVariables.o $(OBJDIR_RELEASE)/src/Functions.o
 
 all: debug release
 
@@ -72,6 +72,9 @@ $(OBJDIR_DEBUG)/src/ShipsParser.o: src/ShipsParser.cpp
 
 $(OBJDIR_DEBUG)/src/FleetVariables.o: src/FleetVariables.cpp
 	$(CXX) $(CFLAGS_DEBUG) $(INC_DEBUG) -c src/FleetVariables.cpp -o $(OBJDIR_DEBUG)/src/FleetVariables.o
+
+$(OBJDIR_DEBUG)/src/Functions.o: src/Functions.cpp
+	$(CXX) $(CFLAGS_DEBUG) $(INC_DEBUG) -c src/Functions.cpp -o $(OBJDIR_DEBUG)/src/Functions.o
 
 clean_debug: 
 	rm -f $(OBJ_DEBUG) $(OUT_DEBUG)
@@ -108,6 +111,9 @@ $(OBJDIR_RELEASE)/src/ShipsParser.o: src/ShipsParser.cpp
 
 $(OBJDIR_RELEASE)/src/FleetVariables.o: src/FleetVariables.cpp
 	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c src/FleetVariables.cpp -o $(OBJDIR_RELEASE)/src/FleetVariables.o
+
+$(OBJDIR_RELEASE)/src/Functions.o: src/Functions.cpp
+	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c src/Functions.cpp -o $(OBJDIR_RELEASE)/src/Functions.o
 
 clean_release: 
 	rm -f $(OBJ_RELEASE) $(OUT_RELEASE)

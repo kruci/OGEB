@@ -113,7 +113,7 @@ int main()
                     /**space for exp loop**/
                     //for(int as = 0; as <= number_of_expeditions;as++)
                     //{
-                        OGSession->sendFleet(*Sp, *Tp, mission::expedition, ships, s, ht, *res);
+                        OGSession->sendFleet(*Sp, *Tp, 15, ships, s, ht, *res);
                     //}
 
                 }
