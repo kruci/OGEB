@@ -11,9 +11,12 @@
 #include "Poco/Path.h"
 #include "Poco/URI.h"
 #include "Poco/Exception.h"
-#include <iostream>
 #include "Position.h"
 #include "Resources.h"
+
+#include <iostream>
+#include <fstream>
+#include <string>
 
 
 using Poco::Net::HTTPClientSession;
@@ -36,6 +39,7 @@ class OGameSession
         std::string server_link = "ogame.gameforge.com";
         std::string server_suffix = "/main/login";
         std::string full_game_server_name;
+        //std::ofstream ofs_login;
         std::vector <HTTPCookie> rcookies;
         HTTPClientSession *session;
         NameValueCollection cookies;

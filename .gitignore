@@ -5,4 +5,4 @@ obj/
 *.layout
 .directory
 *.html
-MyExpConfigTyphon_Primaris
+*.cfg

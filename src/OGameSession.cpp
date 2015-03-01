@@ -154,17 +154,17 @@ bool OGameSession::login()
     session->sendRequest(req3) << req3Body;
 
     HTTPResponse res3;
-    std::istream& rs3 = session->receiveResponse(res3);
+    std::istream& login_istream = session->receiveResponse(res3);
     //res3.getCookies(rcookies);
 
-    //StreamCopier::copyStream(rs3, std::cout);
+    //StreamCopier::copyStream(login_istream, std::cout);
 
-    #ifdef SAVE_HTML_FILES
-    std::ofstream login;
-    login.open("login.html");
-    StreamCopier::copyStream(rs3, login);
-    login.close();
-    #endif // SAVE_HTML_FILES
+    //#ifdef SAVE_HTML_FILES
+    std::ofstream ofs_login;
+    ofs_login.open("login.html");
+    StreamCopier::copyStream(login_istream, ofs_login);
+    ofs_login.close();
+   // #endif // SAVE_HTML_FILES
 
     #ifdef DEBUG
     std::cout<<"#Login Request - stage 3"<<std::endl<<server_prefix<<"."<<server_link<<ruri2.getPathEtc()<<std::endl;
@@ -200,6 +200,7 @@ bool OGameSession::sendFleet(Position &starting_position, Position &target_posit
     std::string ShipStringAndNumber[13];
     std::string ShipStringAndNumber_pf[13];
     std::string pf_ships("");
+    std::string planet_CP = GetPlaneCP("login.html", starting_position);
     for(int tt = 0;tt <=12;tt++)
     {
         ShipStringAndNumber[tt] = "&" + ships::ships_strings[tt] + "=" + std::to_string(ships[tt]);
@@ -215,10 +216,10 @@ bool OGameSession::sendFleet(Position &starting_position, Position &target_posit
                               + std::to_string(resources.getDeuterium()));
 
     /**page=fleet1--------------------------------------------------------------------------------------**/
-    HTTPRequest fleet1(HTTPRequest::HTTP_GET, "/game/index.php?page=fleet1", HTTPMessage::HTTP_1_1);
+    HTTPRequest fleet1(HTTPRequest::HTTP_GET, "/game/index.php?page=fleet1&cp=" + planet_CP, HTTPMessage::HTTP_1_1);
     fleet1.setContentType("application/x-www-form-urlencoded");
     fleet1.setKeepAlive(true);
-    std::string fleet1_reqBody("page=fleet1");
+    std::string fleet1_reqBody("page=fleet1&cp=" + planet_CP);
     fleet1.setContentLength(fleet1_reqBody.length());
     fleet1.setCookies(cookies);
     session->sendRequest(fleet1) << fleet1_reqBody;

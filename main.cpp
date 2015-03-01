@@ -96,16 +96,20 @@ int main()
                     t1 = xConf->getInt("StartingPosition.G");
                     t2 = xConf->getInt("StartingPosition.S");
                     t3 = xConf->getInt("StartingPosition.P");
+                    //cout<<"s.G="<<t1<<"s.S="<<t2<<"s.P="<<t3<<endl;
                     Sp = new Position(t1,t2,t3);
                     t1 = xConf->getInt("TargetPosition.G");
                     t2 = xConf->getInt("TargetPosition.S");
                     t3 = xConf->getInt("TargetPosition.P");
+                    //cout<<"t.G="<<t1<<"t.S="<<t2<<"t.P="<<t3<<endl;
                     Tp = new Position(t1,t2,t3);
                     s = xConf->getInt("Other.Speed");
                     ht = xConf->getInt("Other.HoldTime");
                     t1 = xConf->getInt("Resources.M");
                     t2 = xConf->getInt("Resources.C");
                     t3 = xConf->getInt("Resources.D");
+                    //cout<<"r.M="<<t1<<"r.C="<<t2<<"r.D="<<t3<<endl;
+                    //cout<<"s="<<s<<"ht="<<ht<<endl;
                     res = new Resources(t1,t2,t3);
 
                     for(int a = 0; a <= 12;a++)
@@ -185,6 +189,9 @@ int main()
                         cout<<ships::ships_names[g]<<" :";
                         cin>>ships[g];
                     }
+
+                    /*OGSession->sendFleet(*Sp, *Tp, mission::expedition, ships, s, ht, *res);
+                    return 0;*/
 
                     /**space for exp loop**/
                     for(int as = 0; as <= number_of_expeditions;)
