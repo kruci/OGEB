@@ -8,7 +8,6 @@
 #include "OGameSession.h"
 #include "Position.h"
 #include "Resources.h"
-#include "ShipsParser.h"
 #include "FleetVariables.h"
 #include "Functions.h"
 
