@@ -1,15 +1,16 @@
 #include <iostream>
+#include <algorithm>
 #include <ctime>
 
 #include "Poco/Util/IniFileConfiguration.h"
 #include "Poco/AutoPtr.h"
-#include "Poco/DateTime.h"
 
 #include "OGameSession.h"
 #include "Position.h"
 #include "Resources.h"
 #include "ShipsParser.h"
 #include "FleetVariables.h"
+#include "Functions.h"
 
 #define HELP_SHORT "\"l\" for Login"<<endl<<"\"h\" for Help"<<endl<<"\"e\" for Exit"
 #define INFO "OGame Expeditions Bot by R.K"
@@ -17,7 +18,6 @@
 using namespace std;
 using Poco::AutoPtr;
 using Poco::Util::IniFileConfiguration;
-using Poco::DateTime;
 
 int main()
 {
@@ -31,7 +31,9 @@ int main()
     int ships[13] = {0};
     time_t send, act_time;
 
-    DateTime dt;
+    time_t rawtime;
+    struct tm * timeinfo;
+    string strtime;
 
     AutoPtr<IniFileConfiguration> xConf;
     int t1,t2,t3,s,ht;
@@ -120,8 +122,13 @@ int main()
                     {
                         ships[a] = xConf->getInt("Ships." + to_string(a));
                     }
+
                     /**Start**/
-                    cout<<endl<<"|"<<dt.day()<<"."<<dt.month()<<"."<<dt.year()<<" "<<dt.hour()<<":"<<dt.minute()<<" -----------------------------------|"<<endl;
+                    time (&rawtime);
+                    timeinfo = localtime (&rawtime);
+                    strtime = asctime(timeinfo);
+                    strtime.erase(remove(strtime.begin(), strtime.end(), '\n'), strtime.end());
+                    cout<<endl<<"|"<<strtime<<" -----------------------------------|"<<endl;
                     for(int as = 0; as < number_of_expeditions;)
                     {
                         if(OGSession->sendFleet(*Sp, *Tp, mission::expedition, ships, s, ht, *res) == true)
@@ -138,7 +145,11 @@ int main()
                         act_time = clock();
                         if(act_time/CLOCKS_PER_SEC > send/CLOCKS_PER_SEC + 300)
                         {
-                            cout<<endl<<"|"<<dt.day()<<"."<<dt.month()<<"."<<dt.year()<<" "<<dt.hour()<<":"<<dt.minute()<<" -----------------------------------|";
+                            time (&rawtime);
+                            timeinfo = localtime (&rawtime);
+                            strtime = asctime(timeinfo);
+                            strtime.erase(remove(strtime.begin(), strtime.end(), '\n'), strtime.end());
+                            cout<<endl<<"|"<<strtime<<" -----------------------------------|"<<endl;
                             OGSession->login();
                             for(int as = 0; as < number_of_expeditions;)
                             {
@@ -202,7 +213,11 @@ int main()
                     return 0;*/
 
                     /**space for exp loop**/
-                    cout<<endl<<"|"<<dt.day()<<"."<<dt.month()<<"."<<dt.year()<<" "<<dt.hour()<<":"<<dt.minute()<<" -----------------------------------|"<<endl;
+                    time (&rawtime);
+                    timeinfo = localtime (&rawtime);
+                    strtime = asctime(timeinfo);
+                    strtime.erase(remove(strtime.begin(), strtime.end(), '\n'), strtime.end());
+                    cout<<endl<<"|"<<strtime<<" -----------------------------------|"<<endl;
                     for(int as = 0; as < number_of_expeditions;)
                     {
                         if(OGSession->sendFleet(*Sp, *Tp, mission::expedition, ships, s, ht, *res) == true)
@@ -218,7 +233,11 @@ int main()
                         act_time = clock();
                         if(act_time/CLOCKS_PER_SEC > send/CLOCKS_PER_SEC + 300)
                         {
-                            cout<<endl<<"|"<<dt.day()<<"."<<dt.month()<<"."<<dt.year()<<" "<<dt.hour()<<":"<<dt.minute()<<" -----------------------------------|";
+                            time (&rawtime);
+                            timeinfo = localtime (&rawtime);
+                            strtime = asctime(timeinfo);
+                            strtime.erase(remove(strtime.begin(), strtime.end(), '\n'), strtime.end());
+                            cout<<endl<<"|"<<strtime<<" -----------------------------------|"<<endl;
                             OGSession->login();
                             for(int as = 0; as < number_of_expeditions;)
                             {
