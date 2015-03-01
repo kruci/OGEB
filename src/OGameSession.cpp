@@ -159,12 +159,10 @@ bool OGameSession::login()
 
     //StreamCopier::copyStream(login_istream, std::cout);
 
-    //#ifdef SAVE_HTML_FILES
     std::ofstream ofs_login;
     ofs_login.open("login.html");
     StreamCopier::copyStream(login_istream, ofs_login);
     ofs_login.close();
-   // #endif // SAVE_HTML_FILES
 
     #ifdef DEBUG
     std::cout<<"#Login Request - stage 3"<<std::endl<<server_prefix<<"."<<server_link<<ruri2.getPathEtc()<<std::endl;
@@ -359,7 +357,18 @@ bool OGameSession::sendFleet(Position &starting_position, Position &target_posit
 
 
     if(fleet4_res.getStatus() == 200)
+    {
+        #ifdef CLASS_STATUSPRINTING
+        std::cout<<"Fleet Sent"<<std::endl;
+        #endif // CLASS_STATUSPRINTING
+
         return true;
+    }
     else
+    {
+        #ifdef CLASS_STATUSPRINTING
+        std::cout<<"f ";
+        #endif // CLASS_STATUSPRINTING
         return false;
+    }
 }

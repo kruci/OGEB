@@ -3,6 +3,7 @@
 
 #include "Poco/Util/IniFileConfiguration.h"
 #include "Poco/AutoPtr.h"
+#include "Poco/DateTime.h"
 
 #include "OGameSession.h"
 #include "Position.h"
@@ -16,6 +17,7 @@
 using namespace std;
 using Poco::AutoPtr;
 using Poco::Util::IniFileConfiguration;
+using Poco::DateTime;
 
 int main()
 {
@@ -28,6 +30,8 @@ int main()
     Resources *res = NULL;
     int ships[13] = {0};
     time_t send, act_time;
+
+    DateTime dt;
 
     AutoPtr<IniFileConfiguration> xConf;
     int t1,t2,t3,s,ht;
@@ -117,7 +121,8 @@ int main()
                         ships[a] = xConf->getInt("Ships." + to_string(a));
                     }
                     /**Start**/
-                    for(int as = 0; as <= number_of_expeditions;)
+                    cout<<endl<<"|"<<dt.day()<<"."<<dt.month()<<"."<<dt.year()<<" "<<dt.hour()<<":"<<dt.minute()<<" -----------------------------------|"<<endl;
+                    for(int as = 0; as < number_of_expeditions;)
                     {
                         if(OGSession->sendFleet(*Sp, *Tp, mission::expedition, ships, s, ht, *res) == true)
                         {
@@ -125,6 +130,7 @@ int main()
                         }
                     }
                     send = clock();
+                    cout<<"|Fleets have been sent -----------------------------|"<<endl;
 
                     /**Sending loop**/
                     while(1)
@@ -132,8 +138,9 @@ int main()
                         act_time = clock();
                         if(act_time/CLOCKS_PER_SEC > send/CLOCKS_PER_SEC + 300)
                         {
+                            cout<<endl<<"|"<<dt.day()<<"."<<dt.month()<<"."<<dt.year()<<" "<<dt.hour()<<":"<<dt.minute()<<" -----------------------------------|";
                             OGSession->login();
-                            for(int as = 0; as <= number_of_expeditions;)
+                            for(int as = 0; as < number_of_expeditions;)
                             {
                                 if(OGSession->sendFleet(*Sp, *Tp, mission::expedition, ships, s, ht, *res) == true)
                                 {
@@ -141,6 +148,7 @@ int main()
                                 }
                             }
                             send = clock();
+                            cout<<"|Fleets have been sent -----------------------------|"<<endl;
                         }
                     }
                 }
@@ -194,7 +202,8 @@ int main()
                     return 0;*/
 
                     /**space for exp loop**/
-                    for(int as = 0; as <= number_of_expeditions;)
+                    cout<<endl<<"|"<<dt.day()<<"."<<dt.month()<<"."<<dt.year()<<" "<<dt.hour()<<":"<<dt.minute()<<" -----------------------------------|"<<endl;
+                    for(int as = 0; as < number_of_expeditions;)
                     {
                         if(OGSession->sendFleet(*Sp, *Tp, mission::expedition, ships, s, ht, *res) == true)
                         {
@@ -202,14 +211,16 @@ int main()
                         }
                     }
                     send = clock();
+                    cout<<"|Fleets have been sent -----------------------------|"<<endl;
 
                     while(1)
                     {
                         act_time = clock();
                         if(act_time/CLOCKS_PER_SEC > send/CLOCKS_PER_SEC + 300)
                         {
+                            cout<<endl<<"|"<<dt.day()<<"."<<dt.month()<<"."<<dt.year()<<" "<<dt.hour()<<":"<<dt.minute()<<" -----------------------------------|";
                             OGSession->login();
-                            for(int as = 0; as <= number_of_expeditions;)
+                            for(int as = 0; as < number_of_expeditions;)
                             {
                                 if(OGSession->sendFleet(*Sp, *Tp, mission::expedition, ships, s, ht, *res) == true)
                                 {
@@ -217,6 +228,7 @@ int main()
                                 }
                             }
                             send = clock();
+                            cout<<"|Fleets have been sent -----------------------------|"<<endl;
                         }
                     }
 

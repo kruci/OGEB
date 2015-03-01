@@ -147,18 +147,20 @@ string GetPlaneCP(string login_file, Position &starting_planet)
 
     const char *line_with_token = new char[last_line.length()];
     line_with_token = last_line.c_str();
+    found = last_line.find("cp=");
 
     #ifdef GTf3_DEBUG
     cout<<"Full line: "<<last_line<<endl<<endl;
     cout<<"Rest of line: ";
-    #endif // GTf3_DEBUG
-    found = last_line.find("cp=");
+
+    //found = last_line.find("cp=");
 
     for(int a = found; a < last_line.length();a++)
     {
         cout<<line_with_token[a];
 
     }
+    #endif // GTf3_DEBUG
 
     if (found!=string::npos)
     {
