@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <ctime>
 
 #include "Poco/StreamCopier.h"
 
@@ -183,5 +184,18 @@ string GetPlaneCP(string login_file, Position &starting_planet)
         #endif // GTf3_DEBUG
     }
     return token;
+}
+
+int w8(int seconds)
+{
+    time_t a = clock();
+    time_t b = clock();
+
+    while( ((b = clock())/CLOCKS_PER_SEC) <= a/CLOCKS_PER_SEC + seconds)
+    {
+        continue;
+    }
+
+    return b/CLOCKS_PER_SEC;
 }
 

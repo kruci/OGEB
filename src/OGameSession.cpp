@@ -240,6 +240,7 @@ bool OGameSession::sendFleet(Position &starting_position, Position &target_posit
     fleet1_res.write(std::cout);
     #endif // DEBUG
 
+    w8(1);
     /**page=fleet2--------------------------------------------------------------------------------------**/
     std::string linkf2 = ("/game/index.php?page=fleet2%26galaxy%3D" +std::to_string(starting_position.getGalaxy())
                           +"%26system%3D"+std::to_string(starting_position.getSolarSystem())
@@ -280,6 +281,7 @@ bool OGameSession::sendFleet(Position &starting_position, Position &target_posit
     fleet2_res.write(std::cout);
     #endif // DEBUG
 
+    w8(1);
     /**page=fleet3--------------------------------------------------------------------------------------**/
     //%26 = & %3D =  =
     std::string linkf3 = ("/game/index.php?page=fleet3%26type%3D1%26mission3D" + std::to_string(mission_type) + "%26union%3D0" +
@@ -322,6 +324,7 @@ bool OGameSession::sendFleet(Position &starting_position, Position &target_posit
     std::cout<<std::endl<<std::endl<<"token ="<<token<<std::endl<<std::endl;
     #endif // DEBUG
 
+    w8(1);
     /**Send--------------------------------------------------------------------------------------**/
     std::string fleet4_reqBody = ("holdingtime=" + std::to_string(expedition_time) + "&expeditiontime=" + std::to_string(expedition_time) + "&token=" +
                                   token + "&galaxy=" +
@@ -354,7 +357,7 @@ bool OGameSession::sendFleet(Position &starting_position, Position &target_posit
     std::cout<<fleet4_res.getStatus()<<" "<<fleet4_res.getReason()<< std::endl;
     fleet4_res.write(std::cout);
     #endif // DEBUG
-
+    w8(1);
 
     if(fleet4_res.getStatus() == 200)
     {
