@@ -22,7 +22,7 @@ LIB_DEBUG = $(LIB) -lPocoFoundation -lPocoNet -lPocoUtil
 LDFLAGS_DEBUG = $(LDFLAGS)
 OBJDIR_DEBUG = obj/Debug
 DEP_DEBUG = 
-OUT_DEBUG = bin/Debug/OGame\ Expedition\ Bot
+OUT_DEBUG = bin/Debug/ogeb
 
 INC_RELEASE = $(INC) -Iinclude -I../OGameExpeditionBot
 CFLAGS_RELEASE = $(CFLAGS) -O2 -std=c++11 -g -DCLASS_STATUSPRINTING
@@ -33,7 +33,7 @@ LIB_RELEASE = $(LIB) -lPocoFoundation -lPocoNet -lPocoUtil
 LDFLAGS_RELEASE = $(LDFLAGS) -s
 OBJDIR_RELEASE = obj/Release
 DEP_RELEASE = 
-OUT_RELEASE = bin/Release/OGame\ Expedition\ Bot
+OUT_RELEASE = bin/Release/ogeb
 
 OBJ_DEBUG = $(OBJDIR_DEBUG)/main.o $(OBJDIR_DEBUG)/src/OGameSession.o $(OBJDIR_DEBUG)/src/Position.o $(OBJDIR_DEBUG)/src/Resources.o $(OBJDIR_DEBUG)/src/FleetVariables.o $(OBJDIR_DEBUG)/src/Functions.o
 
