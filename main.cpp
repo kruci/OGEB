@@ -24,23 +24,19 @@ using Poco::Util::IniFileConfiguration;
 
 int main()
 {
-    char option;
-    int number_of_expeditions;
     int ships[13] = {0};
-    int t1,t2,t3,s,ht;
-    bool requests_set1 = true;
+    bool requests_set1 = true; //to detect if it is the first set of requests
     string server, pass, name, filename;
     OGameSession *OGSession = NULL;
-    Position *Sp = NULL, *Tp = NULL;
+    Position *Sp = NULL, *Tp = NULL; //Sp - Starting position, Tp - Target position
     Resources *res = NULL;
-    AutoPtr<IniFileConfiguration> xConf;
-    time_t send, act_time;
-    time_t rawtime;
-    struct tm * timeinfo;
-    string strtime;
+    time_t send, act_time; // time variables
+    time_t rawtime;        //
+    struct tm * timeinfo;  //
+    string strtime;        //
 
 
-    cout << "OGame Expeditions Bot by R.K"<<endl<<endl;
+    cout << "OGame Expeditions Bot by R.K" << endl << endl;
     cout << "server  : ";
     cin >> server;
     cout << "name    : ";
@@ -52,48 +48,44 @@ int main()
     DWORD mode = 0;
     GetConsoleMode(hStdin, &mode);
     SetConsoleMode(hStdin, mode & (~ENABLE_ECHO_INPUT));
-
-    cin >> pass;
-
-    SetConsoleMode(hStdin, mode);
     #else
     termios oldt;
     tcgetattr(STDIN_FILENO, &oldt);
     termios newt = oldt;
     newt.c_lflag &= ~ECHO;
     tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+    #endif // WIN32 or *NIX
 
     cin >> pass;
 
+    #ifdef WIN32
+    SetConsoleMode(hStdin, mode);
+    #else
     tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
     #endif // WIN32 or *NIX
-
 
     OGSession = new OGameSession(server, name, pass);
 
     cout << endl << "File name: ";
     cin >> filename;
 
-    xConf = new IniFileConfiguration(filename);
-    t1 = xConf->getInt("StartingPosition.G");
-    t2 = xConf->getInt("StartingPosition.S");
-    t3 = xConf->getInt("StartingPosition.P");
-    Sp = new Position(t1,t2,t3);
-    t1 = xConf->getInt("TargetPosition.G");
-    t2 = xConf->getInt("TargetPosition.S");
-    t3 = xConf->getInt("TargetPosition.P");
-    Tp = new Position(t1,t2,t3);
-    s = xConf->getInt("Other.Speed");
-    ht = xConf->getInt("Other.HoldTime");
-    number_of_expeditions = xConf->getInt("Other.NumberOfExpedition");
-    t1 = xConf->getInt("Resources.M");
-    t2 = xConf->getInt("Resources.C");
-    t3 = xConf->getInt("Resources.D");
-    res = new Resources(t1,t2,t3);
+    AutoPtr<IniFileConfiguration> conf = new IniFileConfiguration(filename);
+    int speed = conf->getInt("Other.Speed");
+    int hold_time = conf->getInt("Other.HoldTime");
+    int number_of_expeditions = conf->getInt("Other.NumberOfExpeditions");
+
+    Sp = new Position(conf->getInt("StartingPosition.G"), conf->getInt("StartingPosition.S"),
+                      conf->getInt("StartingPosition.P"));
+
+    Tp = new Position(conf->getInt("TargetPosition.G"), conf->getInt("TargetPosition.S"),
+                      conf->getInt("TargetPosition.P"));
+
+    res = new Resources(conf->getInt("Resources.M"), conf->getInt("Resources.C"),
+                        conf->getInt("Resources.D"));
 
     for(int a = 0; a <= 12; a++)
     {
-        ships[a] = xConf->getInt("Ships." + to_string(a));
+        ships[a] = conf->getInt("Ships." + to_string(a));
     }
 
     /**Sending loop**/
@@ -113,7 +105,7 @@ int main()
             OGSession->login();
             for(int as = 0, f = 0; as < number_of_expeditions;)
             {
-                if(OGSession->sendFleet(*Sp, *Tp, mission::expedition, ships, s, ht, *res) == true)
+                if(OGSession->sendFleet(*Sp, *Tp, mission::expedition, ships, speed, hold_time, *res) == true)
                 {
                     as++;
                     cout << "Fleet Sent" << endl;
