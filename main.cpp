@@ -128,11 +128,22 @@ int main()
                     strtime = asctime(timeinfo);
                     strtime.erase(remove(strtime.begin(), strtime.end(), '\n'), strtime.end());
                     cout<<endl<<"|"<<strtime<<" -----------------------------------|"<<endl;
-                    for(int as = 0; as < number_of_expeditions;)
+                    for(int as = 0, f = 0; as < number_of_expeditions;)
                     {
                         if(OGSession->sendFleet(*Sp, *Tp, mission::expedition, ships, s, ht, *res) == true)
                         {
                             as++;
+                           cout<<"Fleet Sent"<<endl;
+                        }
+                        else
+                        {
+                            cout<<"f ";
+                        }
+
+                        if(f >= 30)
+                        {
+                            f = 0;
+                            OGSession->login();
                         }
                     }
                     send = clock();
@@ -150,11 +161,23 @@ int main()
                             strtime.erase(remove(strtime.begin(), strtime.end(), '\n'), strtime.end());
                             cout<<endl<<"|"<<strtime<<" -----------------------------------|"<<endl;
                             OGSession->login();
-                            for(int as = 0; as < number_of_expeditions;)
+                            for(int as = 0, f = 0; as < number_of_expeditions;)
                             {
                                 if(OGSession->sendFleet(*Sp, *Tp, mission::expedition, ships, s, ht, *res) == true)
                                 {
                                     as++;
+                                    cout<<"Fleet Sent"<<endl;
+                                }
+                                else
+                                {
+                                    f++;
+                                    cout<<"f ";
+                                }
+
+                                if(f >= 30)
+                                {
+                                    f = 0;
+                                    OGSession->login();
                                 }
                             }
                             send = clock();

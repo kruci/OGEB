@@ -175,18 +175,16 @@ bool OGameSession::login()
     if(res3.getStatus() == 200)
     {
         #ifdef CLASS_STATUSPRINTING
-        std::cout<<std::endl
-                 <<"---------------------"<<std::endl
+        std::cout<<"---------------------"<<std::endl
                  <<"| Login successful! |"<<std::endl
                  <<"---------------------"<<std::endl;
         #endif // CLASS_STATUSPRINTING
         return true;
     }
     #ifdef CLASS_STATUSPRINTING
-    std::cout<<std::endl
-    <<"----------------------"<<std::endl
-    <<"| Connection failed! |"<<std::endl
-    <<"----------------------"<<std::endl;
+    std::cout<<"----------------------"<<std::endl
+             <<"| Connection failed! |"<<std::endl
+             <<"----------------------"<<std::endl;
     #endif // CLASS_STATUSPRINTING
     return false;
 }
@@ -357,21 +355,20 @@ bool OGameSession::sendFleet(Position &starting_position, Position &target_posit
     std::cout<<fleet4_res.getStatus()<<" "<<fleet4_res.getReason()<< std::endl;
     fleet4_res.write(std::cout);
     #endif // DEBUG
-    w8(1);
 
     if(fleet4_res.getStatus() == 200)
     {
-        #ifdef CLASS_STATUSPRINTING
+        /*#ifdef CLASS_STATUSPRINTING
         std::cout<<"Fleet Sent"<<std::endl;
-        #endif // CLASS_STATUSPRINTING
+        #endif // CLASS_STATUSPRINTING*/
 
         return true;
     }
     else
     {
-        #ifdef CLASS_STATUSPRINTING
+        /*#ifdef CLASS_STATUSPRINTING
         std::cout<<"f ";
-        #endif // CLASS_STATUSPRINTING
+        #endif // CLASS_STATUSPRINTING*/
         return false;
     }
 }
