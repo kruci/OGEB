@@ -88,6 +88,8 @@ int main()
         ships[a] = conf->getInt("Ships." + to_string(a));
     }
 
+    OGSession->login();
+
     /**Sending loop**/
     while(1)
     {
@@ -102,7 +104,9 @@ int main()
             strtime.erase(remove(strtime.begin(), strtime.end(), '\n'), strtime.end());
             cout << endl <<"|" << strtime << " -----------------------------------|" << endl;
 
-            OGSession->login();
+            if(OGSession->loginCheck() == false)
+                OGSession->login();
+
             for(int as = 0, f = 0; as < number_of_expeditions;)
             {
                 if(OGSession->sendFleet(*Sp, *Tp, mission::expedition, ships, speed, hold_time, *res) == true)
@@ -113,13 +117,20 @@ int main()
                 else
                 {
                     f++;
-                    cout << "f ";
+                    if(OGSession->loginCheck() == false)
+                    {
+                        OGSession->login();
+                    }
                 }
 
-                if(f >= 30)
+                if(f >= 5)
                 {
                     f = 0;
-                    OGSession->login();
+                    if(OGSession->loginCheck() == true)
+                    {
+                        cout << "Server does not accept send request!"<<endl;
+                        as++;
+                    }
                 }
             }
             send = clock();
