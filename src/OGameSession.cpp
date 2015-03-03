@@ -374,3 +374,34 @@ bool OGameSession::sendFleet(Position &starting_position, Position &target_posit
         return false;
     }
 }
+
+bool OGameSession::loginCheck()
+{
+    HTTPRequest login_check(HTTPRequest::HTTP_GET, "/game/index.php?page=overview", HTTPMessage::HTTP_1_1);
+    login_check.setContentType("application/x-www-form-urlencoded");
+    login_check.setKeepAlive(true);
+    std::string login_check_reqBody("page=overview");
+    login_check.setContentLength(login_check_reqBody.length());
+    login_check.setCookies(cookies);
+    session->sendRequest(login_check) << login_check_reqBody;
+
+    HTTPResponse login_response;
+    std::istream& fleet1_resString = session->receiveResponse(login_response);
+
+    #ifdef DEBUG
+    std::cout<<std::endl<<"Login check"<<std::endl<<server_prefix<<"."<<server_link<<"/game/index.php?page=overview"<<std::endl;
+    std::cout<<login_check_reqBody<<std::endl;
+    login_check.write(std::cout);
+    std::cout<<login_response.getStatus()<<" "<<login_response.getReason()<< std::endl;
+    login_response.write(std::cout);
+    #endif // DEBUG
+
+    if(login_response.getStatus() == 200)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}

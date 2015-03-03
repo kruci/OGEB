@@ -39,7 +39,6 @@ class OGameSession
         std::string server_link = "ogame.gameforge.com";
         std::string server_suffix = "/main/login";
         std::string full_game_server_name;
-        //std::ofstream ofs_login;
         std::vector <HTTPCookie> rcookies;
         HTTPClientSession *session;
         NameValueCollection cookies;
@@ -48,7 +47,7 @@ class OGameSession
         virtual ~OGameSession();
         bool login();
         bool sendFleet(Position &starting_position, Position &target_position, int mission_type, int ships[], int speed, int expedition_time, Resources &resources);
-
+        bool loginCheck();
 };
 
 #endif // OGAMESEASION_H
