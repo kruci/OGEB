@@ -1,6 +1,8 @@
 #include <iostream>
 #include <algorithm>
 #include <ctime>
+#include <thread>
+#include <chrono>
 
 #ifdef WIN32
 #include <windows.h>
@@ -30,8 +32,7 @@ int main()
     OGameSession *OGSession = NULL;
     Position *Sp = NULL, *Tp = NULL; //Sp - Starting position, Tp - Target position
     Resources *res = NULL;
-    time_t send, act_time; // time variables
-    time_t rawtime;        //
+    time_t rawtime;        // time variables
     struct tm * timeinfo;  //
     string strtime;        //
 
@@ -93,49 +94,49 @@ int main()
     /**Sending loop**/
     while(1)
     {
-        act_time = clock();
-        if( (act_time/CLOCKS_PER_SEC > send/CLOCKS_PER_SEC + 300) || requests_set1 == true)
+        if(requests_set1 == false)
         {
-            requests_set1 = false;
+            this_thread::sleep_for(chrono::seconds(300));
+        }
 
-            time (&rawtime);
-            timeinfo = localtime (&rawtime);
-            strtime = asctime(timeinfo);
-            strtime.erase(remove(strtime.begin(), strtime.end(), '\n'), strtime.end());
-            cout << endl <<"|" << strtime << " -----------------------------------|" << endl;
+        requests_set1 = false;
 
-            if(OGSession->loginCheck() == false)
-                OGSession->login();
+        time (&rawtime);
+        timeinfo = localtime (&rawtime);
+        strtime = asctime(timeinfo);
+        strtime.erase(remove(strtime.begin(), strtime.end(), '\n'), strtime.end());
+        cout << endl <<"|" << strtime << " -----------------------------------|" << endl;
 
-            for(int as = 0, f = 0; as < number_of_expeditions;)
+        if(OGSession->loginCheck() == false)
+            OGSession->login();
+
+        for(int as = 0, f = 0; as < number_of_expeditions;)
+        {
+            if(OGSession->sendFleet(*Sp, *Tp, mission::expedition, ships, speed, hold_time, *res) == true)
             {
-                if(OGSession->sendFleet(*Sp, *Tp, mission::expedition, ships, speed, hold_time, *res) == true)
+                as++;
+                cout << "Fleet Sent" << endl;
+            }
+            else
+            {
+                f++;
+                if(OGSession->loginCheck() == false)
                 {
-                    as++;
-                    cout << "Fleet Sent" << endl;
-                }
-                else
-                {
-                    f++;
-                    if(OGSession->loginCheck() == false)
-                    {
-                        OGSession->login();
-                    }
-                }
-
-                if(f >= 5)
-                {
-                    f = 0;
-                    if(OGSession->loginCheck() == true)
-                    {
-                        cout << "Server does not accept send request!"<<endl;
-                        as++;
-                    }
+                    OGSession->login();
                 }
             }
-            send = clock();
-            cout << "|Fleets have been sent -----------------------------|" << endl;
+
+            if(f >= 5)
+            {
+                f = 0;
+                if(OGSession->loginCheck() == true)
+                {
+                    cout << "Server does not accept send request!"<<endl;
+                    as++;
+                }
+            }
         }
+        cout << "|Fleets have been sent -----------------------------|" << endl;
     }
 
     if(Sp != NULL)
