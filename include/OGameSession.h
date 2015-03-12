@@ -17,6 +17,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <sstream>
 
 
 using Poco::Net::HTTPClientSession;
@@ -34,6 +35,8 @@ using Poco::Exception;
 class OGameSession
 {
     private:
+        std::string login_page, fleet3_page, fleet_movement_page;
+
         std::string server_prefix, name, pass;
         std::string localisation;
         std::string server_link = "ogame.gameforge.com";

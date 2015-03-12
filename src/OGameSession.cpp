@@ -3,6 +3,7 @@
 #include <string>
 #include <thread>
 #include <chrono>
+#include <sstream>
 
 #include "Poco/Net/HTTPClientSession.h"
 #include "Poco/Net/HTTPRequest.h"
@@ -158,13 +159,11 @@ bool OGameSession::login()
     HTTPResponse res3;
     std::istream& login_istream = session->receiveResponse(res3);
     //res3.getCookies(rcookies);
-
-    //StreamCopier::copyStream(login_istream, std::cout);
-
-    std::ofstream ofs_login;
-    ofs_login.open("login.html");
-    StreamCopier::copyStream(login_istream, ofs_login);
-    ofs_login.close();
+    login_page.clear();
+    StreamCopier::copyToString(login_istream, login_page);
+    //std::ofstream out("StreamLogin.html");
+   // out << login_page;
+   // out.close();
 
     #ifdef DEBUG
     std::cout<<"#Login Request - stage 3"<<std::endl<<server_prefix<<"."<<server_link<<ruri2.getPathEtc()<<std::endl;
@@ -198,7 +197,7 @@ bool OGameSession::sendFleet(Position &starting_position, Position &target_posit
     std::string ShipStringAndNumber[13];
     std::string ShipStringAndNumber_pf[13];
     std::string pf_ships("");
-    std::string planet_CP = GetPlaneCP("login.html", starting_position);
+    std::string planet_CP = GetPlaneCP(login_page, starting_position);
     for(int tt = 0;tt <=12;tt++)
     {
         ShipStringAndNumber[tt] = "&" + ships::ships_strings[tt] + "=" + std::to_string(ships[tt]);
@@ -263,8 +262,6 @@ bool OGameSession::sendFleet(Position &starting_position, Position &target_posit
     HTTPResponse fleet2_res;
     std::istream& fleet2_resString = session->receiveResponse(fleet2_res);
 
-    //std::cerr << fleet2_resString.rdbuf();
-
     #ifdef SAVE_HTML_FILES
     std::ofstream pagef2;
     pagef2.open("pagef2.html");
@@ -303,11 +300,15 @@ bool OGameSession::sendFleet(Position &starting_position, Position &target_posit
     session->sendRequest(fleet3) << fleet3_reqBody;
     HTTPResponse fleet3_res;
     std::istream& fleet3_resString = session->receiveResponse(fleet3_res);
+    fleet3_page.clear();
+    StreamCopier::copyToString(fleet3_resString, fleet3_page);
 
-    /*std::ofstream pagef3;
+    #ifdef SAVE_HTML_FILES
+    std::ofstream pagef3;
     pagef3.open("pagef3.html");
-    StreamCopier::copyStream(fleet3_resString, pagef3);
-    pagef3.close();*/
+    pagef3 << fleet3_page;
+    pagef3.close();
+    #endif // SAVE_HTML_FILES
 
     #ifdef DEBUG
     std::cout<<"#Sending Fleet - stage 3"<<std::endl<<server_prefix<<"."<<server_link<<"/game/index.php?page=fleet3"<<std::endl;
@@ -318,7 +319,7 @@ bool OGameSession::sendFleet(Position &starting_position, Position &target_posit
     #endif // DEBUG
 
     /**Get token---------------------------------------------------------------------------------**/
-    token = GetToken_f3(fleet3_resString);
+    token = GetToken_f3(fleet3_page);
 
     #ifdef DEBUG
     std::cout<<std::endl<<std::endl<<"token ="<<token<<std::endl<<std::endl;
@@ -342,6 +343,8 @@ bool OGameSession::sendFleet(Position &starting_position, Position &target_posit
 
     HTTPResponse fleet4_res;
     std::istream& fleet4_resString = session->receiveResponse(fleet4_res);
+    fleet_movement_page.clear();
+    StreamCopier::copyToString(fleet4_resString, fleet_movement_page);
 
     #ifdef SAVE_HTML_FILES
     std::ofstream movement;
@@ -386,7 +389,9 @@ bool OGameSession::loginCheck()
     session->sendRequest(login_check) << login_check_reqBody;
 
     HTTPResponse login_response;
-    std::istream& fleet1_resString = session->receiveResponse(login_response);
+    std::istream& login_resString = session->receiveResponse(login_response);
+    login_page.clear();
+    StreamCopier::copyToString(login_resString, login_page);
 
     #ifdef DEBUG
     std::cout<<std::endl<<"Login check"<<std::endl<<server_prefix<<"."<<server_link<<"/game/index.php?page=overview"<<std::endl;

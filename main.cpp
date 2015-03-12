@@ -20,7 +20,7 @@
 #include "FleetVariables.h"
 #include "Functions.h"
 
-using namespace std;
+using namespace std; //std stands for Sexually Transmitted Diseases
 using Poco::AutoPtr;
 using Poco::Util::IniFileConfiguration;
 
@@ -108,7 +108,9 @@ int main()
         cout << endl <<"|" << strtime << " -----------------------------------|" << endl;
 
         if(OGSession->loginCheck() == false)
+        {
             OGSession->login();
+        }
 
         for(int as = 0, f = 0; as < number_of_expeditions;)
         {
