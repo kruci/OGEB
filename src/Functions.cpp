@@ -14,7 +14,7 @@ using  Poco::StreamCopier;
 
 string GetToken_f3(string f3_page)
 {
-    string token;
+    string token("");
     string to_find("token' value='");
 
     size_t found = f3_page.find(to_find);;
@@ -30,6 +30,7 @@ string GetToken_f3(string f3_page)
         #ifdef GTf3_DEBUG
         cout << "TOKEN NOT FOUND!" << endl;
         #endif // GTf3_DEBUG
+        return "token";
     }
 
     token = f3_page.substr(found, 50);
@@ -51,7 +52,7 @@ string GetPlaneCP(string login_page, Position &starting_planet)
 {
     string to_find = ("[" + to_string(starting_planet.getGalaxy()) + ":" + to_string(starting_planet.getSolarSystem()) +
                         ":" + to_string(starting_planet.getPlanet()) + "]&lt;/B&gt;&lt;BR&gt");
-    string cp;
+    string cp("");
 
     size_t found = login_page.find(to_find);;
 
@@ -66,6 +67,7 @@ string GetPlaneCP(string login_page, Position &starting_planet)
         #ifdef GTf3_DEBUG
         cout << "Suradnice NOT FOUND!" << endl;
         #endif // GTf3_DEBUG
+        return "cp";
     }
 
     cp = login_page.substr(found - 150, 150);

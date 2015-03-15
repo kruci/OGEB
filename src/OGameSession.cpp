@@ -300,6 +300,7 @@ bool OGameSession::sendFleet(Position &starting_position, Position &target_posit
     session->sendRequest(fleet3) << fleet3_reqBody;
     HTTPResponse fleet3_res;
     std::istream& fleet3_resString = session->receiveResponse(fleet3_res);
+
     fleet3_page.clear();
     StreamCopier::copyToString(fleet3_resString, fleet3_page);
 
