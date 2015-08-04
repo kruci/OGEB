@@ -173,6 +173,8 @@ bool OGameSession::login()
     res3.write(std::cout);
     #endif // DEBUG
 
+    delete session1;
+
     if(res3.getStatus() == 200)
     {
         #ifdef CLASS_STATUSPRINTING

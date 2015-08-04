@@ -149,6 +149,8 @@ int main()
         delete res;
     if(OGSession != NULL)
         delete OGSession;
+    if(timeinfo != NULL)
+        delete timeinfo;
 
     return 0;
 }
